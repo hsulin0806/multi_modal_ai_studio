@@ -1,0 +1,17 @@
+services:
+  mmas:
+    image: mmas-local:py312
+    container_name: mmas-local
+    restart: unless-stopped
+    ports:
+      - "18092:8092"
+    gpus: all
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./sessions:/app/sessions
+      - ./videos:/app/videos
+      - mmas_config:/root/.config/multi-modal-ai-studio
+
+volumes:
+  mmas_config:
